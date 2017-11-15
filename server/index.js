@@ -28,11 +28,7 @@ app.use(
   })
 );
 
-
-
-
-
-module.exports = new Auth0Strategy(
+passport.use(new Auth0Strategy(
   {
     domain,
     clientID,
@@ -51,7 +47,7 @@ module.exports = new Auth0Strategy(
       }
     })
   }
-);
+));
 
 passport.serializeUser(function(user, done){
   done(null, user);
@@ -62,7 +58,7 @@ passport.deserializeUser(function(obj, done){
 })
 
 app.get("/login", passport.authenticate("auth0", {
-  successRedirect: "hhtp://localhost:3000/"
+  successRedirect: "http://localhost:3000/"
   })
 )
 
