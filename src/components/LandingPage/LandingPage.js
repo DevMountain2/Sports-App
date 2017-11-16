@@ -18,6 +18,7 @@ class LandingPage extends Component {
     render(){
       return (
         <div>
+        Landing Page
           <button onClick={this.handleLogin}>Login Here</button>
         </div>
       );

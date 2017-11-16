@@ -5,12 +5,15 @@ const session = require('express-session');
 const massive = require('massive');
 const passport = require('passport');
 const Auth0Strategy = require("passport-auth0");
+const axios = require('axios')
 
 const { secret } = require('../config.js').session
 const { domain, clientID, clientSecret } = require("../config.js").Auth0;
+const { NBA, NFL } = require("../config.js").Api_key;
 
 const port = 3001;
 const connectionString = require("../config.js").massive;
+
 
 const app = express();
 
@@ -58,7 +61,7 @@ passport.deserializeUser(function(obj, done){
 })
 
 app.get("/login", passport.authenticate("auth0", {
-  successRedirect: "http://localhost:3000/"
+  successRedirect: "http://localhost:3000/Home"
   })
 )
 
@@ -67,6 +70,15 @@ app.get("/api/me", function(req, res){
   return res.status(404);
   res.status(200).json(req.user)
 })
+console.log(NBA);
+
+app.get('/api/NBAgames', (req, res) => {
+  console.log("server")
+  axios.get('http://api.sportradar.us/nba/trial/v4/en/games/2017/REG/schedule.json?api_key=' + NBA).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
 
 
 
