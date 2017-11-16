@@ -70,11 +70,21 @@ app.get("/api/me", function(req, res){
   return res.status(404);
   res.status(200).json(req.user)
 })
-console.log(NBA);
-
+//*************************************** API CALLS TO SPORTRADAR **************************************************
 app.get('/api/NBAgames', (req, res) => {
-  console.log("server")
   axios.get('http://api.sportradar.us/nba/trial/v4/en/games/2017/REG/schedule.json?api_key=' + NBA).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/NFLgames', (req, res) => {
+  axios.get('http://api.sportradar.us/nfl-ot1/games/2017/REG/schedule.json?api_key=' + NFL).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/NFLHierarchy', (req, res) => {
+  axios.get('http://api.sportradar.us/nfl-ot2/league/hierarchy.json?api_key=' + NFL).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })

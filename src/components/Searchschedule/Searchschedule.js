@@ -3,20 +3,14 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {searchSchedule} from '../../ducks/reducer.js'
 
-
 class SearchSchedule extends Component {
-
-    componentDidMount(){
-      this.props.searchSchedule()
-
-    }
 
 
   render(){
     console.log(this.props.NBAgames);
     return(
       <div>
-        <input/>
+        <button onClick={this.props.searchSchedule}> Nba games</button>
       </div>
 
     )
