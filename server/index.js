@@ -95,6 +95,11 @@ app.get('/api/NFLroster', (req, res) => {
   }).catch(console.log)
 })
 
+app.get('/api/NFLplayers', (req, res) => {
+  axios.get('http://api.sportradar.us/nfl-ot2/players/9634e162-5ff5-4372-b72b-ee1b0cb73a0d/profile.json?api_key=' + NFL).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
 
 
 

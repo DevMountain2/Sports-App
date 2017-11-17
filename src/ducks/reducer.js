@@ -5,7 +5,8 @@ const initialState = {
   NBAgames: [],
   NFLgames: [],
   NFLHierarchy: [],
-  NFLRoster: []
+  NFLRoster: [],
+  NFLPlayers: []
 };
 
 const REQ_USER ='REQ_USER'
@@ -13,6 +14,7 @@ const SEARCH_SCHEDULE = 'SEARCH_SCHEDULE'
 const NFL_GAMES = "NFL_GAMES"
 const NFL_HIERARCHY = "NFL_HIERARCHY"
 const NFL_ROSTER = "NFL_ROSTER"
+const NFL_PLAYERS = "NFL_PLAYERS"
 
 export function requestUser(){
   return {
@@ -55,6 +57,16 @@ export function searchNFLRoster(){
   }
 }
 
+// NFL PLAYERS
+export function searchNFLPlayers(){
+  return {
+    type: NFL_PLAYERS,
+    payload: axios.get('/api/NFLplayers').then(response => {
+      return response.data
+    })
+  }
+}
+
 export default function reducer(state = initialState, action){
   switch(action.type) {
     case REQ_USER + "_PENDING":
@@ -86,6 +98,13 @@ export default function reducer(state = initialState, action){
 
     case NFL_ROSTER + "_FULFILLED":
       return Object.assign({}, state, { NFLRoster: action.payload, isLoading: false })
+
+    case NFL_PLAYERS + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case  NFL_PLAYERS + "_FULFILLED":
+      return Object.assign({}, state, { NFLPlayers: action.payload, isLoading: false})
+
     default:
       return state;
   }
