@@ -101,7 +101,23 @@ app.get('/api/NFLplayers', (req, res) => {
   }).catch(console.log)
 })
 
+app.get('/api/NBAleague', (req, res) => {
+  axios.get('http://api.sportradar.us/nba/trial/v4/en/league/hierarchy.json?api_key=' + NBA).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
 
+app.get('/api/NBAroster', (req, res) => {
+  axios.get('http://api.sportradar.us/nba/trial/v4/en/teams/583ec825-fb46-11e1-82cb-f4ce4684ea4c/profile.json?api_key=' + NBA).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/NBAplayers', (req, res) => {
+  axios.get('http://api.sportradar.us/nba/trial/v4/en/players/ab532a66-9314-4d57-ade7-bb54a70c65ad/profile.json?api_key=' + NBA).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
 
 
 massive(connectionString)

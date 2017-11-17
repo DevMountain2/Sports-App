@@ -1,0 +1,10 @@
+.main-nav {
+  height: 80px;
+  width: 100%;
+  background: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+}

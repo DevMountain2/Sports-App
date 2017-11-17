@@ -6,7 +6,10 @@ const initialState = {
   NFLgames: [],
   NFLHierarchy: [],
   NFLRoster: [],
-  NFLPlayers: []
+  NFLPlayers: [],
+  NBALeague: [],
+  NBARoster: [],
+  NBAPlayers: []
 };
 
 const REQ_USER ='REQ_USER'
@@ -15,6 +18,9 @@ const NFL_GAMES = "NFL_GAMES"
 const NFL_HIERARCHY = "NFL_HIERARCHY"
 const NFL_ROSTER = "NFL_ROSTER"
 const NFL_PLAYERS = "NFL_PLAYERS"
+const NBA_LEAGUE = "NBA_LEAGUE"
+const NBA_ROSTER = "NBA_ROSTER"
+const NBA_PLAYERS = "NBA_PLAYERS"
 
 export function requestUser(){
   return {
@@ -67,6 +73,36 @@ export function searchNFLPlayers(){
   }
 }
 
+//NBA LEAGUE
+export function searchNBALeague(){
+  return {
+    type: NBA_LEAGUE,
+    payload: axios.get('/api/NBAleague').then(response => {
+      return response.data
+    })
+  }
+}
+
+//NBA ROSTER
+export function searchNBARoster(){
+  return {
+    type: NBA_ROSTER,
+    payload: axios.get('/api/NBAroster').then(response => {
+      return response.data
+    })
+  }
+}
+
+//NBA PLAYERS
+export function searchNBAPlayers(){
+  return {
+    type: NBA_PLAYERS,
+    payload: axios.get('/api/NBAplayers').then(response => {
+      return response.data
+    })
+  }
+}
+
 export default function reducer(state = initialState, action){
   switch(action.type) {
     case REQ_USER + "_PENDING":
@@ -104,6 +140,25 @@ export default function reducer(state = initialState, action){
 
     case  NFL_PLAYERS + "_FULFILLED":
       return Object.assign({}, state, { NFLPlayers: action.payload, isLoading: false})
+
+    case NBA_LEAGUE + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case NBA_LEAGUE + "_FULFILLED":
+      return Object.assign({}, state, { NBALeague: action.payload, isLoading: false})
+
+    case NBA_ROSTER + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case NBA_ROSTER + "_FULFILLED":
+      return Object.assign({}, state, { NBARoster: action.payload, isLoading: false})
+
+    case NBA_PLAYERS + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case NBA_PLAYERS + "_FULFILLED":
+      return Object.assign({}, state, { NBAPlayers: action.payload, isLoading: false})
+
 
     default:
       return state;
