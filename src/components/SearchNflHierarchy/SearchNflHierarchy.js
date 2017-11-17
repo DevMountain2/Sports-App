@@ -7,9 +7,10 @@ class SearchNflHierarchy extends Component {
 
   render(){
     console.log(this.props.NFLHierarchy);
+
     return(
       <div>
-        <button onClick={this.props.SearchNflHierarchy}>nfl league</button>
+        <button onClick={this.props.searchNflHierarchy}>nfl league</button>
       </div>
     )
   }

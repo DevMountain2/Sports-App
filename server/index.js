@@ -89,6 +89,12 @@ app.get('/api/NFLHierarchy', (req, res) => {
   }).catch(console.log)
 })
 
+app.get('/api/NFLroster', (req, res) => {
+  axios.get('http://api.sportradar.us/nfl-ot2/teams/33405046-04ee-4058-a950-d606f8c30852/full_roster.json?api_key=' + NFL).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
 
 
 
