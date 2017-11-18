@@ -10,11 +10,10 @@ class SearchNflHierarchy extends Component {
 
     return(
       <div>
-        <button onClick={this.props.searchNflHierarchy}>nfl league</button>
+        <button onClick={this.props.searchNflHierarchy}>nfl teams</button>
       </div>
     )
   }
-
 }
 
 function mapStateToProps(state){

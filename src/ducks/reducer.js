@@ -9,7 +9,11 @@ const initialState = {
   NFLPlayers: [],
   NBALeague: [],
   NBARoster: [],
-  NBAPlayers: []
+  NBAPlayers: [],
+  MLBSchedule: [],
+  MLBPlayers: [],
+  MLBTeams: [],
+  MLBRoster: []
 };
 
 const REQ_USER ='REQ_USER'
@@ -21,6 +25,10 @@ const NFL_PLAYERS = "NFL_PLAYERS"
 const NBA_LEAGUE = "NBA_LEAGUE"
 const NBA_ROSTER = "NBA_ROSTER"
 const NBA_PLAYERS = "NBA_PLAYERS"
+const MLB_SCHEDULE = "MLB_SCHEDULE"
+const MLB_PLAYERS = "MLB_PLAYERS"
+const MLB_TEAMS = "MLB_TEAMS"
+const MLB_ROSTER = "MLB_ROSTER"
 
 export function requestUser(){
   return {
@@ -103,6 +111,47 @@ export function searchNBAPlayers(){
   }
 }
 
+//MLB schedule
+export function searchMLBSchedule(){
+  return {
+    type: MLB_SCHEDULE,
+    payload: axios.get('/api/MLBschedule').then(response => {
+      return response.data
+    })
+  }
+}
+
+//MLB players
+export function searchMLBPlayers(){
+  return {
+    type: MLB_PLAYERS,
+    payload: axios.get('/api/MLBplayers').then(response => {
+      return response.data
+    })
+  }
+}
+
+//MLB TEAMS
+export function searchMLBTeams(){
+  return {
+    type: MLB_TEAMS,
+    payload: axios.get('/api/MLBteams').then(response => {
+      return response.data
+    })
+  }
+}
+
+//MLB ROSTER
+export function searchMLBRoster(){
+  return {
+    type: MLB_ROSTER,
+    payload: axios.get('/api/MLBroster').then(response => {
+      return response.data
+    })
+  }
+}
+
+
 export default function reducer(state = initialState, action){
   switch(action.type) {
     case REQ_USER + "_PENDING":
@@ -139,25 +188,51 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, { isLoading: true})
 
     case  NFL_PLAYERS + "_FULFILLED":
-      return Object.assign({}, state, { NFLPlayers: action.payload, isLoading: false})
+      return Object.assign({}, state, { NFLPlayers: action.payload, isLoading: false })
 
     case NBA_LEAGUE + "_PENDING":
       return Object.assign({}, state, { isLoading: true})
 
     case NBA_LEAGUE + "_FULFILLED":
-      return Object.assign({}, state, { NBALeague: action.payload, isLoading: false})
+      return Object.assign({}, state, { NBALeague: action.payload, isLoading: false })
 
     case NBA_ROSTER + "_PENDING":
       return Object.assign({}, state, { isLoading: true})
 
     case NBA_ROSTER + "_FULFILLED":
-      return Object.assign({}, state, { NBARoster: action.payload, isLoading: false})
+      return Object.assign({}, state, { NBARoster: action.payload, isLoading: false })
 
     case NBA_PLAYERS + "_PENDING":
       return Object.assign({}, state, { isLoading: true})
 
     case NBA_PLAYERS + "_FULFILLED":
-      return Object.assign({}, state, { NBAPlayers: action.payload, isLoading: false})
+      return Object.assign({}, state, { NBAPlayers: action.payload, isLoading: false })
+
+    case MLB_SCHEDULE + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case MLB_SCHEDULE + "_FULFILLED":
+      return Object.assign({}, state, { MLBSchedule: action.payload, isLoading: false })
+
+    case MLB_PLAYERS + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case MLB_PLAYERS + "_FULFILLED":
+      return Object.assign({}, state, { MLBPlayers: action.payload, isLoading: false })
+
+    case MLB_TEAMS + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case MLB_TEAMS + "_FULFILLED":
+      return Object.assign({}, state, { MLBTeams: action.payload, isLoading: false })
+
+    case MLB_ROSTER + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
+
+    case MLB_ROSTER + "_FULFILLED":
+      return Object.assign({}, state, { MLBRoster: action.payload, isLoading: false })
+
+
 
 
     default:

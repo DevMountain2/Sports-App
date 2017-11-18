@@ -9,7 +9,7 @@ class SearchNflPlayers extends Component {
     console.log(this.props);
     return (
       <div>
-        <button onClick={this.props.searchNFLPlayers}> Nfl Players </button>
+        <button onClick={this.props.searchNFLPlayers}> Nfl Player profile </button>
       </div>
     )
   }

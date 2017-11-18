@@ -9,7 +9,7 @@ const axios = require('axios')
 
 const { secret } = require('../config.js').session
 const { domain, clientID, clientSecret } = require("../config.js").Auth0;
-const { NBA, NFL } = require("../config.js").Api_key;
+const { NBA, NFL, MLB } = require("../config.js").Api_key;
 
 const port = 3001;
 const connectionString = require("../config.js").massive;
@@ -119,6 +119,29 @@ app.get('/api/NBAplayers', (req, res) => {
   }).catch(console.log)
 })
 
+app.get('/api/MLBschedule', (req, res) => {
+  axios.get('http://api.sportradar.us/mlb-t6/games/2017/REG/schedule.json?api_key=' + MLB).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/MLBplayers', (req, res) => {
+  axios.get('http://api.sportradar.us/mlb-t6/players/6e1cac5c-b059-4b80-a267-5143b19efb27/profile.json?api_key=' + MLB).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/MLBteams', (req, res) => {
+  axios.get('http://api.sportradar.us/mlb-t6/league/hierarchy.json?api_key=' + MLB).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
+
+app.get('/api/MLBroster', (req, res) => {
+  axios.get('http://api.sportradar.us/mlb-t6/teams/aa34e0ed-f342-4ec6-b774-c79b47b60e2d/profile.json?api_key=' + MLB).then(response => {
+    return res.send(response.data)
+  }).catch(console.log)
+})
 
 massive(connectionString)
   .then(dbInstance => app.set("db", dbInstance))

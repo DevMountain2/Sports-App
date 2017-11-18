@@ -7,6 +7,10 @@ import SearchNflPlayers from '../SearchNflPlayers/SearchNflPlayers'
 import SearchNbaLeague from '../SearchNbaLeague/SearchNbaLeague'
 import SearchNbaRoster from '../SearchNbaRoster/SearchNbaRoster'
 import SearchNbaPlayers from '../SearchNbaPlayers/SearchNbaPlayers'
+import SearchMlbSchedule from '../SearchMlbSchedule/SearchMlbSchedule'
+import SearchMlbPlayers from '../SearchMlbPlayers/SearchMlbPlayers'
+import SearchMlbTeams from '../SearchMlbTeams/SearchMlbTeams'
+import SearchMlbRoster from '../SearchMlbRoster/SearchMlbRoster'
 import NavBar from '../NavBar/NavBar'
 //import { reduxMethods } from './reducer'
 
@@ -17,6 +21,10 @@ class Home extends Component {
     return(
       <div>
         <NavBar />
+        <SearchMlbRoster />
+        <SearchMlbTeams />
+        <SearchMlbSchedule />
+        <SearchMlbPlayers />
         <SearchSchedule />
         <SearchNbaPlayers />
         <SearchNbaLeague />
