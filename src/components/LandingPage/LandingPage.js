@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import './LandingPage.css'
 
 class LandingPage extends Component {
   constructor(props) {
@@ -17,9 +18,11 @@ class LandingPage extends Component {
     }
     render(){
       return (
-        <div>
-        Landing Page
+      <div className="background-gif">
+        <div className="login-button">
+        <h1>Welcome to Sportify</h1>
           <button onClick={this.handleLogin}>Login Here</button>
+          </div>
         </div>
       );
     }

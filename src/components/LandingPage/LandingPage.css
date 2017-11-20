@@ -1,0 +1,42 @@
+.background-gif{
+  background-image: url('../../images/BaseballField.jpg');
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+@keyframes gm-slidein {
+    from {
+        -webkit-transform:translate3d(0,-100%,0);
+        opacity:0;
+        transform:translate3d(0,-100%,0);
+    }
+
+    to {
+        -webkit-transform:none;
+        opacity:1;
+        transform:none;
+    }
+}
+
+.login-button{
+  -moz-animation:gm-slidein 5s 1;
+  -ms-animation:gm-slidein 5s 1;
+  -o-animation:gm-slidein 5s 1;
+  -webkit-animation:gm-slidein 5s 1;
+  animation:gm-slidein 5s 1;
+  margin:0 auto;
+  max-width:50%;
+  padding:4em 0 2em;
+  text-align:center;
+  color: white;
+  font-size: 25px;
+}

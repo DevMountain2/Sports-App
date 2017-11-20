@@ -11,6 +11,7 @@ import SearchMlbSchedule from '../SearchMlbSchedule/SearchMlbSchedule'
 import SearchMlbPlayers from '../SearchMlbPlayers/SearchMlbPlayers'
 import SearchMlbTeams from '../SearchMlbTeams/SearchMlbTeams'
 import SearchMlbRoster from '../SearchMlbRoster/SearchMlbRoster'
+import DropDownMenu from '../DropDownMenu/DropDownMenu'
 import NavBar from '../NavBar/NavBar'
 //import { reduxMethods } from './reducer'
 
@@ -33,6 +34,7 @@ class Home extends Component {
         <SearchNflHierarchy />
         <SearchNFLRoster />
         <SearchNflPlayers />
+        <DropDownMenu />
         <h1>Home page</h1>
       </div>
     )
