@@ -57,10 +57,18 @@ export function searchNflGames(){
 export function searchNflHierarchy(){
   return {
     type: NFL_HIERARCHY,
-    payload: axios.get('/api/NFLHierarchy').then(response => response.data)
-  }
-}
+    payload: axios.get('/api/NFLHierarchy').then(response => {
+        let teams = []
+    response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z =>{
+      let teamName = z.market + " " + z.name
+      teams.push(teamName)
 
+
+    })})})
+    return teams
+  })
+}
+}
 //NFL ROSTER
 export function searchNFLRoster(){
   return {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {searchNflHierarchy} from '../../ducks/reducer.js'
 
 
 class DropDownMenu extends Component {
@@ -37,4 +38,9 @@ class DropDownMenu extends Component {
     );
   }
 }
-export default DropDownMenu
+function mapStateToProps(state){
+  return {
+    NFLHierarchy: state.NFLHierarchy
+  }
+}
+export default connect(mapStateToProps,{searchNflHierarchy})(DropDownMenu)
