@@ -6,8 +6,6 @@ import {searchNflHierarchy} from '../../ducks/reducer.js'
 class SearchNflHierarchy extends Component {
 
   render(){
-    console.log(this.props.NFLHierarchy);
-
     return(
       <div>
         <button onClick={this.props.searchNflHierarchy}>nfl teams</button>

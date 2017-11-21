@@ -58,12 +58,12 @@ export function searchNflHierarchy(){
   return {
     type: NFL_HIERARCHY,
     payload: axios.get('/api/NFLHierarchy').then(response => {
-        let teams = []
+        let nflteams = []
     response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z =>{
       let teamName = z.market + " " + z.name
-      teams.push(teamName)
+      nflteams.push(teamName)
     })})})
-    return teams
+    return nflteams.sort()
   })
 }
 }
@@ -93,11 +93,11 @@ export function searchNBALeague(){
     type: NBA_LEAGUE,
     payload: axios.get('/api/NBAleague').then(response => {
       let nbateams = []
-      response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z => {
-        let teamName = z.market + " " + z.name
-        nbateams.push(teamName)
-      })})})
-      return nbateams
+       response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z => {
+         let teamName = z.market + " " + z.name
+         nbateams.push(teamName)
+       })})})
+       return nbateams.sort()
     })
   }
 }
@@ -121,6 +121,7 @@ export function searchNBAPlayers(){
     })
   }
 }
+
 
 //MLB schedule
 export function searchMLBSchedule(){
@@ -147,7 +148,12 @@ export function searchMLBTeams(){
   return {
     type: MLB_TEAMS,
     payload: axios.get('/api/MLBteams').then(response => {
-      return response.data
+      let mlbteams = []
+     response.data.leagues.map(x => {x.divisions.map(y => {y.teams.map(z => {
+       let teamName = z.market + " " + z.name
+       mlbteams.push(teamName)
+     })})})
+     return mlbteams.sort()
     })
   }
 }
