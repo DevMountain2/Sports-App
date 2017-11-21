@@ -13,6 +13,7 @@ import SearchMlbTeams from '../SearchMlbTeams/SearchMlbTeams'
 import SearchMlbRoster from '../SearchMlbRoster/SearchMlbRoster'
 import DropDownMenu from '../DropDownMenu/DropDownMenu'
 import NavBar from '../NavBar/NavBar'
+import './Home.css'
 //import { reduxMethods } from './reducer'
 
 
@@ -20,6 +21,7 @@ import NavBar from '../NavBar/NavBar'
 class Home extends Component {
   render(){
     return(
+    <div className="main-container">
       <div>
         <NavBar />
         <SearchMlbRoster />
@@ -37,6 +39,7 @@ class Home extends Component {
         <DropDownMenu />
         <h1>Home page</h1>
       </div>
+    </div>
     )
   }
 }
