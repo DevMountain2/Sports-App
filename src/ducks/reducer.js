@@ -62,8 +62,6 @@ export function searchNflHierarchy(){
     response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z =>{
       let teamName = z.market + " " + z.name
       teams.push(teamName)
-
-
     })})})
     return teams
   })
@@ -94,7 +92,12 @@ export function searchNBALeague(){
   return {
     type: NBA_LEAGUE,
     payload: axios.get('/api/NBAleague').then(response => {
-      return response.data
+      let nbateams = []
+      response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z => {
+        let teamName = z.market + " " + z.name
+        nbateams.push(teamName)
+      })})})
+      return nbateams
     })
   }
 }
