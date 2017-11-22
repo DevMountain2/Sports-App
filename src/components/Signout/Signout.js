@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class Signout extends Component {
-  render(){
+    render(){
     return (
-
+      <div className="signout-button">
+        onClick={this.props.history.push('/')}
+      </div>
     )
   }
 

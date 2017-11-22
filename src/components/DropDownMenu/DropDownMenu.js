@@ -31,21 +31,21 @@ class DropDownMenu extends Component {
     this.props.searchNflHierarchy().then(result => {
       this.setState({nflteams: result.value})
     })
-    this.props.searchNBALeague().then(result => {
-      this.setState({nbateams: result.value})
-    })
-    this.props.searchMLBTeams().then(result => {
-      this.setState({mlbteams: result.value})
-    })
-    this.props.searchNBARoster().then(result => {
-      this.setState({nbaroster: result.value})
-    })
+    // this.props.searchNBALeague().then(result => {
+    //   this.setState({nbateams: result.value})
+    // })
+    // this.props.searchMLBTeams().then(result => {
+    //   this.setState({mlbteams: result.value})
+    // })
+    // this.props.searchNBARoster().then(result => {
+    //   this.setState({nbaroster: result.value})
+    // })
     this.props.searchNFLRoster().then(result => {
       this.setState({nflroster: result.value})
     })
-    this.props.searchMLBRoster().then(result => {
-      this.setState({mlbroster: result.value})
-    })
+    // this.props.searchMLBRoster().then(result => {
+    //   this.setState({mlbroster: result.value})
+    // })
   }
 
 
@@ -110,8 +110,8 @@ class DropDownMenu extends Component {
           Pick your Sport:
           <select value={this.state.value} onChange={(event) => {this.setState({selected: event.target.value})}}>
             <option value="NFL">Football</option>
-            <option value="NBA">Basketball</option>
-            <option value="MLB">Baseball</option>
+            <option value="NFL">Basketball</option>
+            <option value="NFL">Baseball</option>
           </select>
           {dropdown}
           {roster}

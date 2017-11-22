@@ -23,11 +23,11 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  session({
+app.use(session({
     secret,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 10000 }
   })
 );
 
