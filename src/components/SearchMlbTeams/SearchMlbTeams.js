@@ -6,7 +6,7 @@ import {searchMLBTeams} from '../../ducks/reducer.js'
 class SearchMlbTeams extends Component {
 
   render(){
-    console.log(this.props.MLBTeams)
+    //console.log(this.props.MLBTeams)
 
     return (
       <div>

@@ -25,15 +25,12 @@ class Home extends Component {
       <div>
         <NavBar />
         <SearchMlbRoster />
-        <SearchMlbTeams />
         <SearchMlbSchedule />
         <SearchMlbPlayers />
         <SearchSchedule />
         <SearchNbaPlayers />
-        <SearchNbaLeague />
         <SearchNbaRoster />
         <SearchNflGames />
-        <SearchNflHierarchy />
         <SearchNFLRoster />
         <SearchNflPlayers />
         <DropDownMenu />

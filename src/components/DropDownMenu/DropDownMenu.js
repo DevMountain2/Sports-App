@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {searchNflHierarchy, searchMLBTeams, searchNBALeague} from '../../ducks/reducer.js'
+import {searchNflHierarchy, searchMLBTeams, searchNBALeague, searchMLBRoster, searchNBARoster, searchNFLRoster } from '../../ducks/reducer.js'
 
 
 class DropDownMenu extends Component {
@@ -11,51 +11,97 @@ class DropDownMenu extends Component {
       nflteams: '',
       nbateams: '',
       mlbteams: '',
-      selected: ''
+      nflroster: '',
+      nbaroster: '',
+      mlbroster: '',
+      selected: '',
+      teamSelect: '',
+      dropdownTeam: ''
   };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
-    event.preventDefault();
-  }
 
   componentDidMount(){
     this.props.searchNflHierarchy().then(result => {
       this.setState({nflteams: result.value})
     })
+    this.props.searchNBALeague().then(result => {
+      this.setState({nbateams: result.value})
+    })
+    this.props.searchMLBTeams().then(result => {
+      this.setState({mlbteams: result.value})
+    })
+    this.props.searchNBARoster().then(result => {
+      this.setState({nbaroster: result.value})
+    })
+    this.props.searchNFLRoster().then(result => {
+      this.setState({nflroster: result.value})
+    })
+    this.props.searchMLBRoster().then(result => {
+      this.setState({mlbroster: result.value})
+    })
   }
+
 
   render() {
     let dropdown = null
     let options = null
+    let roster = null
+    let rosterOptions = null
 
     if (this.state.selected === "NFL"){
       options = this.state.nflteams.map(x => {
         return (<option key={x} value={x}> {x} </option>)
       })
-
-      dropdown = (<select value="NFLTeams" onChange={(event) => {console.log(event.target.value)}}>
+      dropdown = (<select value={this.state.dropdownTeam} onChange={(event) => {this.setState({dropdownTeam: event.target.value})}}>
       {options}
       </select>)
+      if (this.state.nflroster){
+        console.log("ya")
+        rosterOptions = this.state.nflTeams.map(x => {
+          return (<option key={x} value ={x}> {x} </option>)
+        })
+        roster = (<select onChange={(event) => {console.log(event.target.data)}}>
+        {rosterOptions}
+        </select>
+      )
+      }
+
+
+
     } else if (this.state.selected === "NBA"){
+        options = this.state.nbateams.map(x => {
+          return (<option key={x} value={x}> {x} </option>)
+      })
       dropdown = (<select value="MLBTeams" onChange={(event) => {console.log(event.target.value)}}>
-      <option value="team"> Team </option>
+      {options}
       </select>)
     }
      else if (this.state.selected === "MLB"){
-      console.log(typeof this.state.mlbteams)
+       options = this.state.mlbteams.map(x => {
+         return (<option key={x} value={x}> {x} </option>)
+       })
       dropdown = (<select value="MLBTeams">
-      <option value="team"> Team </option>
+      {options}
       </select>
     )
+    }
+
+    if(this.state.teamSelect === "NFL"){
+
+      options = this.state.nflroster.map(x => {
+        return (<option key={x} value={x}> {x} </option>)
+      })
+      dropdown = (<select value="NFLRoster">
+      {options}
+      </select>
+)
     }
 
     return (
@@ -68,6 +114,7 @@ class DropDownMenu extends Component {
             <option value="MLB">Baseball</option>
           </select>
           {dropdown}
+          {roster}
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -79,4 +126,4 @@ function mapStateToProps(state){
     NFLHierarchy: state.NFLHierarchy
   }
 }
-export default connect(mapStateToProps,{searchNflHierarchy, searchMLBTeams, searchNBALeague})(DropDownMenu)
+export default connect(mapStateToProps,{searchNflHierarchy, searchMLBTeams, searchNBALeague, searchNBARoster, searchNFLRoster, searchMLBRoster})(DropDownMenu)
