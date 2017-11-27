@@ -41,7 +41,14 @@ export function requestUser(){
 export function searchSchedule(){
   return {
     type: SEARCH_SCHEDULE,
-    payload: axios.get('/api/NBAgames').then(response => response.data)
+    payload: axios.get('/api/NBAgames').then(response => {
+      let nbaVenue = []
+      response.data.games.map(x => {x.venue
+        let nbaGames = x.venue
+        nbaVenue.push(nbaGames)
+      })
+      return nbaVenue
+    })
   }
 }
 

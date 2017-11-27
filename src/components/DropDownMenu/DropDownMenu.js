@@ -27,26 +27,26 @@ class DropDownMenu extends Component {
   }
 
 
-  componentDidMount(){
-    this.props.searchNflHierarchy().then(result => {
-      this.setState({nflteams: result.value})
-    })
-    // this.props.searchNBALeague().then(result => {
-    //   this.setState({nbateams: result.value})
-    // })
-    // this.props.searchMLBTeams().then(result => {
-    //   this.setState({mlbteams: result.value})
-    // })
-    // this.props.searchNBARoster().then(result => {
-    //   this.setState({nbaroster: result.value})
-    // })
-    this.props.searchNFLRoster().then(result => {
-      this.setState({nflroster: result.value})
-    })
-    // this.props.searchMLBRoster().then(result => {
-    //   this.setState({mlbroster: result.value})
-    // })
-  }
+  // componentDidMount(){
+  //   this.props.searchNflHierarchy().then(result => {
+  //     this.setState({nflteams: result.value})
+  //   })
+  //    this.props.searchNBALeague().then(result => {
+  //      this.setState({nbateams: result.value})
+  //    })
+  //    this.props.searchMLBTeams().then(result => {
+  //      this.setState({mlbteams: result.value})
+  //    })
+  //    this.props.searchNBARoster().then(result => {
+  //      this.setState({nbaroster: result.value})
+  //    })
+  //   this.props.searchNFLRoster().then(result => {
+  //     this.setState({nflroster: result.value})
+  //   })
+  //    this.props.searchMLBRoster().then(result => {
+  //      this.setState({mlbroster: result.value})
+  //    })
+  // }
 
 
   render() {
