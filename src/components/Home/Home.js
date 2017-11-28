@@ -29,7 +29,6 @@ class Home extends Component {
         <SearchMlbPlayers />
         <SearchSchedule />
         <SearchNbaPlayers />
-        <SearchNbaRoster />
         <SearchNflGames />
         <SearchNFLRoster />
         <SearchNflPlayers />

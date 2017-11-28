@@ -89,8 +89,8 @@ app.get('/api/NFLHierarchy', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/NFLroster', (req, res) => {
-  axios.get('http://api.sportradar.us/nfl-ot2/teams/33405046-04ee-4058-a950-d606f8c30852/full_roster.json?api_key=' + NFL).then(response => {
+app.get('/api/NFLroster/:team_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/nfl-ot2/teams/${req.params.team_id}/full_roster.json?api_key=` + NFL).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -107,14 +107,14 @@ app.get('/api/NBAleague', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/NBAroster', (req, res) => {
-  axios.get('http://api.sportradar.us/nba/trial/v4/en/teams/583ec825-fb46-11e1-82cb-f4ce4684ea4c/profile.json?api_key=' + NBA).then(response => {
+app.get('/api/NBAroster/:team_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/nba/trial/v4/en/teams/${req.params.team_id}/profile.json?api_key=` + NBA).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
 
-app.get('/api/NBAplayers', (req, res) => {
-  axios.get('http://api.sportradar.us/nba/trial/v4/en/players/ab532a66-9314-4d57-ade7-bb54a70c65ad/profile.json?api_key=' + NBA).then(response => {
+app.get('/api/NBAplayers/:id', (req, res) => {
+  axios.get(`http://api.sportradar.us/nba/trial/v4/en/players/${req.params.id}/profile.json?api_key=` + NBA).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -138,7 +138,7 @@ app.get('/api/MLBteams', (req, res) => {
 })
 
 app.get('/api/MLBroster', (req, res) => {
-  axios.get('http://api.sportradar.us/mlb-t6/teams/aa34e0ed-f342-4ec6-b774-c79b47b60e2d/profile.json?api_key=' + MLB).then(response => {
+  axios.get(`http://api.sportradar.us/mlb-t6/teams/${req.params.id}/profile.json?api_key=` + MLB).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })

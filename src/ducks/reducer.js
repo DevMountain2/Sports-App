@@ -68,26 +68,23 @@ export function searchNflHierarchy(){
         let nflteams = []
     response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z =>{
       let teamName = z.market + " " + z.name
-      nflteams.push(teamName)
+      nflteams.push(z)
     })})})
     return nflteams.sort()
   })
 }
 }
 //NFL ROSTER
-export function searchNFLRoster(){
+export function searchNFLRoster(id){
   return {
     type: NFL_ROSTER,
-    payload: axios.get('/api/NFLroster').then(response => {
-      let nflroster = []
-      response.data.players.map(x => {
-        let playerName = x.name
-        nflroster.push(playerName)
-      })
-      return nflroster.sort()
+    payload: axios.get('/api/NFLroster/' + id).then(response => {
+      console.log(response.data.players)
+      return response.data.players
     })
   }
 }
+
 
 // NFL PLAYERS
 export function searchNFLPlayers(){
@@ -107,24 +104,21 @@ export function searchNBALeague(){
       let nbateams = []
        response.data.conferences.map(x => {x.divisions.map(y => {y.teams.map(z => {
          let teamName = z.market + " " + z.name
-         nbateams.push(teamName)
+         nbateams.push(z)
        })})})
+       //console.log(nbateams);
        return nbateams.sort()
     })
   }
 }
 
 //NBA ROSTER
-export function searchNBARoster(){
+export function searchNBARoster(id){
   return {
     type: NBA_ROSTER,
-    payload: axios.get('/api/NBAroster').then(response => {
-      let nbaroster = []
-      response.data.players.map(x => {
-        let playerName = x.full_name
-        nbaroster.push(playerName)
-      })
-      return nbaroster.sort();
+    payload: axios.get('/api/NBAroster/' + id).then(response => {
+      console.log(response.data.players)
+      return response.data.players;
     })
   }
 }
@@ -168,7 +162,7 @@ export function searchMLBTeams(){
       let mlbteams = []
      response.data.leagues.map(x => {x.divisions.map(y => {y.teams.map(z => {
        let teamName = z.market + " " + z.name
-       mlbteams.push(teamName)
+       mlbteams.push(z)
      })})})
      return mlbteams.sort()
     })
@@ -179,13 +173,8 @@ export function searchMLBTeams(){
 export function searchMLBRoster(){
   return {
     type: MLB_ROSTER,
-    payload: axios.get('/api/MLBroster').then(response => {
-      let mlbroster = []
-      response.data.players.map(x => {
-        let playerName = x.full_name
-        mlbroster.push(playerName)
-      })
-        return mlbroster.sort();
+    payload: axios.get('/api/MLBroster/:team_id').then(response => {
+        return response.data.players.sort();
     })
   }
 }
