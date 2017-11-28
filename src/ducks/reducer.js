@@ -79,7 +79,7 @@ export function searchNFLRoster(id){
   return {
     type: NFL_ROSTER,
     payload: axios.get('/api/NFLroster/' + id).then(response => {
-      console.log(response.data.players)
+      //console.log(response.data.players)
       return response.data.players
     })
   }
@@ -117,7 +117,7 @@ export function searchNBARoster(id){
   return {
     type: NBA_ROSTER,
     payload: axios.get('/api/NBAroster/' + id).then(response => {
-      console.log(response.data.players)
+      //console.log(response.data.players)
       return response.data.players;
     })
   }
@@ -170,10 +170,11 @@ export function searchMLBTeams(){
 }
 
 //MLB ROSTER
-export function searchMLBRoster(){
+export function searchMLBRoster(id){
   return {
     type: MLB_ROSTER,
-    payload: axios.get('/api/MLBroster/:team_id').then(response => {
+    payload: axios.get('/api/MLBroster/' + id).then(response => {
+      //console.log(response.data.players);
         return response.data.players.sort();
     })
   }

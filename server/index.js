@@ -137,8 +137,8 @@ app.get('/api/MLBteams', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/MLBroster', (req, res) => {
-  axios.get(`http://api.sportradar.us/mlb-t6/teams/${req.params.id}/profile.json?api_key=` + MLB).then(response => {
+app.get('/api/MLBroster/:team_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/mlb-t6/teams/${req.params.team_id}/profile.json?api_key=` + MLB).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })

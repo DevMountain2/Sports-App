@@ -67,22 +67,35 @@ class DropDownMenu extends Component {
      else if (this.state.selectedSport === "MLB"){
        options = this.state.mlbteams.map(x => {
          //console.log(x);
-         return (<option key={x.id} value={x.name + " " + x.market}> {x.market + " " + x.name} </option>)
+         return (<option key={x.id} value={x.id}> {x.market + " " + x.name} </option>)
        })
-      dropdown = (<select>
+      dropdown = (<select onChange={e => this.props.searchMLBRoster(e.target.value)}>
       {options}
       </select>)
     }
     let playerDropDown = () => {
-      if(!this.props.NBARoster){
-        return null
-      }
-      return  (
-        <select> {this.props.NBARoster.map(x => {
-           return (<option key={x.id} value={x.id}> {x.full_name} </option>)
-        })}
+      if(this.props.NBARoster.length){
+        return  (
+          <select> {this.props.NBARoster.map(x => {
+             return (<option key={x.id} value={x.id}> {x.full_name} </option>)
+          })}
+            </select>
+        )
+      } else if(this.props.NFLRoster.length){
+        return  (
+          <select> {this.props.NFLRoster.map(x => {
+             return (<option key={x.id} value={x.id}> {x.name} </option>)
+          })}
+            </select>
+        )
+      } else if(this.props.MLBRoster) {
+        return (
+          <select> {this.props.MLBRoster.map(x => {
+            return (<option key={x.id} value={x.full_name}> {x.full_name} </option>)
+          })}
           </select>
-      )
+        )
+      }
     }
 
 
@@ -90,7 +103,7 @@ class DropDownMenu extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Pick your Sport:
+          Find your fantasy players:
           <select value={this.state.value} onChange={(event) => {this.setState({selectedSport: event.target.value})}}>
             <option value="NFL">Football</option>
             <option value="NBA">Basketball</option>

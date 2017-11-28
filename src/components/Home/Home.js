@@ -24,13 +24,12 @@ class Home extends Component {
     <div className="main-container">
       <div>
         <NavBar />
-        <SearchMlbRoster />
+
         <SearchMlbSchedule />
         <SearchMlbPlayers />
         <SearchSchedule />
         <SearchNbaPlayers />
-        <SearchNflGames />
-        <SearchNFLRoster />
+        <SearchNflGames />      
         <SearchNflPlayers />
         <DropDownMenu />
         <h1>Home page</h1>
