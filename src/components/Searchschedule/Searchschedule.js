@@ -7,7 +7,7 @@ class SearchSchedule extends Component {
 
 
   render(){
-    console.log(this.props.NBAgames);
+    //console.log(this.props.NBAgames);
     return(
       <div>
         <button onClick={this.props.searchSchedule}> Nba games</button>

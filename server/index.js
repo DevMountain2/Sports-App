@@ -95,8 +95,8 @@ app.get('/api/NFLroster/:team_id', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/NFLplayers', (req, res) => {
-  axios.get('http://api.sportradar.us/nfl-ot2/players/9634e162-5ff5-4372-b72b-ee1b0cb73a0d/profile.json?api_key=' + NFL).then(response => {
+app.get('/api/NFLplayers/:player_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/nfl-ot2/players/${req.params.player_id}/profile.json?api_key=` + NFL).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -147,9 +147,13 @@ massive(connectionString)
   .then(dbInstance => app.set("db", dbInstance))
   .catch(console.log("Connection String is here"));
 
-
+// DATABASE instances
 app.get("/api/test", (req, res, next) => { const dbInstance = req.app.get("db")
 dbInstance.getUsers().then(response => { res.json(response) })
+.catch(console.log); });
+
+app.post('/api/Favorites', (req, res, next) => { const dbInstance = req.app.post('db')
+dbInstance.createFavorites().then(response => { res.json(response)})
 .catch(console.log); });
 
 

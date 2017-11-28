@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import axios from 'axios'
 import {searchNflHierarchy, searchMLBTeams, searchNBALeague, searchMLBRoster, searchNBARoster, searchNFLRoster } from '../../ducks/reducer.js'
 
 
@@ -15,15 +16,25 @@ class DropDownMenu extends Component {
       selectedTeam: '',
       dropdownTeam: '',
       teamId: '',
-      playerId:'',
+      selectedPlayer: ''
 
   };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePlayer = this.handlePlayer.bind(this)
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
+  }
+
+  handlePlayer(userInput){
+    this.setState({ selectedPlayer: userInput});
+  }
+
+  handleSubmit(){
+    console.log(this.state.selectedPlayer);
   }
 
 
@@ -76,21 +87,21 @@ class DropDownMenu extends Component {
     let playerDropDown = () => {
       if(this.props.NBARoster.length){
         return  (
-          <select> {this.props.NBARoster.map(x => {
+          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.NBARoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
             </select>
         )
       } else if(this.props.NFLRoster.length){
         return  (
-          <select> {this.props.NFLRoster.map(x => {
+          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.NFLRoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.name} </option>)
           })}
             </select>
         )
       } else if(this.props.MLBRoster) {
         return (
-          <select> {this.props.MLBRoster.map(x => {
+          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.MLBRoster.map(x => {
             return (<option key={x.id} value={x.full_name}> {x.full_name} </option>)
           })}
           </select>
@@ -104,7 +115,7 @@ class DropDownMenu extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Find your fantasy players:
-          <select value={this.state.value} onChange={(event) => {this.setState({selectedSport: event.target.value})}}>
+          <select onChange={(event) => {this.setState({selectedSport: event.target.value})}}>
             <option value="NFL">Football</option>
             <option value="NBA">Basketball</option>
             <option value="MLB">Baseball</option>

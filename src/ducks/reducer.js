@@ -87,10 +87,10 @@ export function searchNFLRoster(id){
 
 
 // NFL PLAYERS
-export function searchNFLPlayers(){
+export function searchNFLPlayers(id){
   return {
     type: NFL_PLAYERS,
-    payload: axios.get('/api/NFLplayers').then(response => {
+    payload: axios.get('/api/NFLplayers/' + id).then(response => {
       return response.data
     })
   }

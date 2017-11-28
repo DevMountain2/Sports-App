@@ -6,7 +6,7 @@ import {searchMLBSchedule} from '../../ducks/reducer.js'
 class SearchMlbSchedule extends Component {
 
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div>
         <button onClick={this.props.searchMLBSchedule}> mlb Schedule </button>

@@ -6,7 +6,7 @@ import {searchNFLPlayers} from '../../ducks/reducer.js'
 class SearchNflPlayers extends Component {
 
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div>
         <button onClick={this.props.searchNFLPlayers}> Nfl Player profile </button>
