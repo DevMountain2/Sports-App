@@ -14,14 +14,7 @@ const { NBA, NFL, MLB } = require("../config.js").Api_key;
 const port = 3001;
 const connectionString = require("../config.js").massive;
 
-
 const app = express();
-
-app.use(json());
-app.use(cors());
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(session({
     secret,
@@ -30,6 +23,13 @@ app.use(session({
     cookie: { maxAge: 10000 }
   })
 );
+
+app.use(json());
+app.use(cors());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 passport.use(new Auth0Strategy(
   {
@@ -42,11 +42,10 @@ passport.use(new Auth0Strategy(
     app.get("db").getUserByAuthId(profile.id).then(response =>{
       if(!response[0]){
         app.get("db").createUserByAuth([profile.id, profile.displayName]).then(created => {
-          console.log(created);
-          return done(null, created[0])
+           return done(null, created[0])
         });
       } else {
-        return done(null, response[0]);
+         return done(null, response[0]);
       }
     })
   }
@@ -66,9 +65,17 @@ app.get("/login", passport.authenticate("auth0", {
 )
 
 app.get("/api/me", function(req, res){
-  if(!req.user)
-  return res.status(404);
-  res.status(200).json(req.user)
+  if(!req.user) return res.status(404);
+  res.status(200).json(req.user);
+});
+  //   res.status(500).send('not logged in')
+  //
+  // res.status(200).json(req.user)
+
+
+app.get('/api/test', function(req,res) {
+  const keys = Object.keys(req)
+  res.json(keys)
 })
 //*************************************** API CALLS TO SPORTRADAR **************************************************
 app.get('/api/NBAgames', (req, res) => {
@@ -148,12 +155,16 @@ massive(connectionString)
   .catch(console.log("Connection String is here"));
 
 // DATABASE instances
+app.get("/api/Favorites", (req, res, next) => { const dbInstance = req.app.get("db")
+dbInstance.getFavorites().then(response => { res.json(response) })
+.catch(console.log); });
+
 app.get("/api/test", (req, res, next) => { const dbInstance = req.app.get("db")
 dbInstance.getUsers().then(response => { res.json(response) })
 .catch(console.log); });
 
-app.post('/api/Favorites', (req, res, next) => { const dbInstance = req.app.post('db')
-dbInstance.createFavorites().then(response => { res.json(response)})
+app.post('/api/Favorites', (req, res, next) => { const dbInstance = req.app.get('db');
+dbInstance.createFavorites([req.user.id, req.body.player_id]).then(response => { res.json(response)})
 .catch(console.log); });
 
 

@@ -13,7 +13,8 @@ const initialState = {
   MLBSchedule: [],
   MLBPlayers: [],
   MLBTeams: [],
-  MLBRoster: []
+  MLBRoster: [],
+  reqFavorites: []
 };
 
 const REQ_USER ='REQ_USER'
@@ -29,11 +30,25 @@ const MLB_SCHEDULE = "MLB_SCHEDULE"
 const MLB_PLAYERS = "MLB_PLAYERS"
 const MLB_TEAMS = "MLB_TEAMS"
 const MLB_ROSTER = "MLB_ROSTER"
+const REQ_FAVORITES = "REQ_FAVORITES"
+
+
+// Calls to Database
+export function requestFavorites(){
+  return{
+    type: REQ_FAVORITES,
+    payload: axios.get('/api/Favorites').then(response => {console.log(response.data)
+      return response.data
+    })
+  }
+}
 
 export function requestUser(){
   return {
     type: REQ_USER,
-    payload: axios.get('/api/me').then(response => response.data)
+    payload: axios.get('/api/me').then(response => {console.log(response.data)
+        return response.data
+    })
   }
 }
 
@@ -261,8 +276,11 @@ export default function reducer(state = initialState, action){
     case MLB_ROSTER + "_FULFILLED":
       return Object.assign({}, state, { MLBRoster: action.payload, isLoading: false })
 
+    case REQ_FAVORITES + "_PENDING":
+      return Object.assign({}, state, { isLoading: true})
 
-
+    case REQ_FAVORITES + "_FULFILLED":
+      return Object.assign({}, state, { reqFavorites: action.payload, isLoading: false})
 
     default:
       return state;

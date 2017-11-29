@@ -17,7 +17,6 @@ class DropDownMenu extends Component {
       dropdownTeam: '',
       teamId: '',
       selectedPlayer: ''
-
   };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,7 +33,7 @@ class DropDownMenu extends Component {
   }
 
   handleSubmit(){
-    console.log(this.state.selectedPlayer);
+    axios.post('/api/Favorites', {user_id: this.props.user.id, player_id: this.state.selectedPlayer})
   }
 
 
@@ -102,7 +101,7 @@ class DropDownMenu extends Component {
       } else if(this.props.MLBRoster) {
         return (
           <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.MLBRoster.map(x => {
-            return (<option key={x.id} value={x.full_name}> {x.full_name} </option>)
+            return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
           </select>
         )
