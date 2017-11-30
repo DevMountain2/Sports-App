@@ -8,20 +8,27 @@ import './Favorites.css'
 class Favorites extends Component {
     constructor(props){
       super(props)
+      this.state = {
+
+      }
+
 
     }
   componentDidMount(){
     axios.get('/api/Favorites').then(response => {
-      console.log(response);
+      console.log(response.data);
     })
+    
   }
 
 
 
   render(){
+
     return(
       <div className="image">
         <div className='main-div'> This is the favorites page </div>
+        <h1> </h1>
       </div>
     )
   }

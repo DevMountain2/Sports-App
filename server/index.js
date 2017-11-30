@@ -18,9 +18,9 @@ const app = express();
 
 app.use(session({
     secret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 10000 }
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
   })
 );
 
@@ -120,8 +120,8 @@ app.get('/api/NBAroster/:team_id', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/NBAplayers/:id', (req, res) => {
-  axios.get(`http://api.sportradar.us/nba/trial/v4/en/players/${req.params.id}/profile.json?api_key=` + NBA).then(response => {
+app.get('/api/NBAplayers/:player_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/nba/trial/v4/en/players/${req.params.player_id}/profile.json?api_key=` + NBA).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -155,17 +155,37 @@ massive(connectionString)
   .catch(console.log("Connection String is here"));
 
 // DATABASE instances
-app.get("/api/Favorites", (req, res, next) => { const dbInstance = req.app.get("db")
-dbInstance.getFavorites().then(response => { res.json(response) })
-.catch(console.log); });
+app.get("/api/Favorites", (req, res, next) => {
+  const dbInstance = req.app.get("db")
+
+  if(req.user.id){
+    console.log("user ", req.user.id)
+  dbInstance.getFavoritesByUserId([req.user.id]).then(response => {
+    console.log(response)
+    return res.json(response) })
+    .catch(console.log);
+  }
+  else{
+    console.log("failed ",req)
+  }
+ });
 
 app.get("/api/test", (req, res, next) => { const dbInstance = req.app.get("db")
 dbInstance.getUsers().then(response => { res.json(response) })
 .catch(console.log); });
 
-app.post('/api/Favorites', (req, res, next) => { const dbInstance = req.app.get('db');
-dbInstance.createFavorites([req.user.id, req.body.player_id]).then(response => { res.json(response)})
-.catch(console.log); });
+app.post('/api/postFavorites', (req, res, next) => {
+  const dbInstance = req.app.get('db')
+  console.log("trying to find user id to post ",req.user);
+  if(req.user){
+    console.log("posting", req.user.id, req.body.player_id);
+    dbInstance.createFavorites([req.user.id, req.body.player_id]).then(response => { res.json(response)})
+    .catch(console.log)
+  }
+  else {
+    console.log("error", req)
+  }
+ });
 
 
 

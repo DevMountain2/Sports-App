@@ -29,11 +29,13 @@ class DropDownMenu extends Component {
   }
 
   handlePlayer(userInput){
+    console.log(userInput);
     this.setState({ selectedPlayer: userInput});
   }
 
   handleSubmit(){
-    axios.post('/api/Favorites', {user_id: this.props.user.id, player_id: this.state.selectedPlayer})
+    console.log(this.state.selectedPlayer);
+    axios.post('/api/postFavorites', {player_id: this.state.selectedPlayer})
   }
 
 

@@ -139,10 +139,10 @@ export function searchNBARoster(id){
 }
 
 //NBA PLAYERS
-export function searchNBAPlayers(){
+export function searchNBAPlayers(id){
   return {
     type: NBA_PLAYERS,
-    payload: axios.get('/api/NBAplayers').then(response => {
+    payload: axios.get('/api/NBAplayers/' + id).then(response => {
       return response.data
     })
   }

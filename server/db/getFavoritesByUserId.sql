@@ -1,1 +1,2 @@
-SELECT * FROM favorite_players WHERE user_id = $1
+SELECT * FROM favorite_players
+WHERE user_id = $1
