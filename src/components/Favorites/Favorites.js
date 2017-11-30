@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {requestFavorites} from '../../ducks/reducer.js'
+import NavBar from '../NavBar/NavBar'
 import './Favorites.css'
 
 class Favorites extends Component {
@@ -18,17 +19,22 @@ class Favorites extends Component {
     axios.get('/api/Favorites').then(response => {
       console.log(response.data);
     })
-    
+
   }
 
 
 
   render(){
 
+
+
     return(
       <div className="image">
+      <NavBar />
+
         <div className='main-div'> This is the favorites page </div>
-        <h1> </h1>
+        <div className="players-container"> Your saved players </div>
+
       </div>
     )
   }
