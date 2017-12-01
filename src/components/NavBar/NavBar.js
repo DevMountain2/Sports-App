@@ -13,6 +13,9 @@ render(){
       <Link to= '/Favorites'>
       <div className="Favorites">Favorites</div>
       </Link>
+      <Link to='/Home'>
+      <div className="Home">Home</div>
+      </Link>
       <div onClick={() => {this.props.history.push('/')}}className="Logout">Logout</div>
     </div>
   )

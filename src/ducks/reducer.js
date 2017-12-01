@@ -6,15 +6,13 @@ const initialState = {
   NFLgames: [],
   NFLHierarchy: [],
   NFLRoster: [],
-  NFLPlayers: [],
   NBALeague: [],
   NBARoster: [],
-  NBAPlayers: [],
   MLBSchedule: [],
-  MLBPlayers: [],
   MLBTeams: [],
   MLBRoster: [],
-  reqFavorites: []
+  reqFavorites: [],
+  selectedPlayer: {}
 };
 
 const REQ_USER ='REQ_USER'
@@ -160,10 +158,10 @@ export function searchMLBSchedule(){
 }
 
 //MLB players
-export function searchMLBPlayers(){
+export function searchMLBPlayers(id){
   return {
     type: MLB_PLAYERS,
-    payload: axios.get('/api/MLBplayers').then(response => {
+    payload: axios.get('/api/MLBplayers/' + id).then(response => {
       return response.data
     })
   }
@@ -232,7 +230,7 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, { isLoading: true})
 
     case  NFL_PLAYERS + "_FULFILLED":
-      return Object.assign({}, state, { NFLPlayers: action.payload, isLoading: false })
+      return Object.assign({}, state, { selectedPlayer: action.payload, isLoading: false })
 
     case NBA_LEAGUE + "_PENDING":
       return Object.assign({}, state, { isLoading: true})
@@ -250,7 +248,7 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, { isLoading: true})
 
     case NBA_PLAYERS + "_FULFILLED":
-      return Object.assign({}, state, { NBAPlayers: action.payload, isLoading: false })
+      return Object.assign({}, state, { selectedPlayer: action.payload, isLoading: false })
 
     case MLB_SCHEDULE + "_PENDING":
       return Object.assign({}, state, { isLoading: true})
@@ -262,7 +260,7 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, { isLoading: true})
 
     case MLB_PLAYERS + "_FULFILLED":
-      return Object.assign({}, state, { MLBPlayers: action.payload, isLoading: false })
+      return Object.assign({}, state, { selectedPlayer: action.payload, isLoading: false })
 
     case MLB_TEAMS + "_PENDING":
       return Object.assign({}, state, { isLoading: true})

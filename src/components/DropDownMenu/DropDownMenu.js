@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {searchNflHierarchy, searchMLBTeams, searchNBALeague, searchMLBRoster, searchNBARoster, searchNFLRoster } from '../../ducks/reducer.js'
+import {searchNflHierarchy, searchMLBTeams, searchNBALeague, searchMLBRoster, searchNBARoster, searchNFLRoster, searchNBAPlayers, searchNFLPlayers, searchMLBPlayers } from '../../ducks/reducer.js'
 
 
 class DropDownMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nflteams: '',
-      nbateams: '',
-      mlbteams: '',
+      nflteams: [],
+      nbateams: [],
+      mlbteams: [],
       selectedSport: '',
       selectedTeam: '',
       dropdownTeam: '',
@@ -29,13 +29,14 @@ class DropDownMenu extends Component {
   }
 
   handlePlayer(userInput){
-    console.log(userInput);
     this.setState({ selectedPlayer: userInput});
   }
 
-  handleSubmit(){
-    console.log(this.state.selectedPlayer);
-    axios.post('/api/postFavorites', {player_id: this.state.selectedPlayer})
+  handleSubmit(e){
+    e.preventDefault()
+    console.log(this.props.selectedPlayer);
+    console.log(this.state.selectedSport);
+    axios.post('/api/postFavorites', {player_id: this.props.selectedPlayer, selectedSport: this.state.selectedSport})
   }
 
 
@@ -85,24 +86,26 @@ class DropDownMenu extends Component {
       {options}
       </select>)
     }
+
+
     let playerDropDown = () => {
       if(this.props.NBARoster.length){
         return  (
-          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.NBARoster.map(x => {
+          <select onChange={(e)=>this.props.searchNBAPlayers(e.target.value)}> {this.props.NBARoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
             </select>
         )
       } else if(this.props.NFLRoster.length){
         return  (
-          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.NFLRoster.map(x => {
+          <select onChange={(e)=>this.props.searchNFLPlayers(e.target.value)}> {this.props.NFLRoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.name} </option>)
           })}
             </select>
         )
       } else if(this.props.MLBRoster) {
         return (
-          <select onChange={(e)=>this.handlePlayer(e.target.value)}> {this.props.MLBRoster.map(x => {
+          <select onChange={(e)=>this.props.searchMLBPlayers(e.target.value)}> {this.props.MLBRoster.map(x => {
             return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
           </select>
@@ -133,4 +136,4 @@ class DropDownMenu extends Component {
 function mapStateToProps(state){
   return state
 }
-export default connect(mapStateToProps,{searchNflHierarchy, searchMLBTeams, searchNBALeague, searchNBARoster, searchNFLRoster, searchMLBRoster})(DropDownMenu)
+export default connect(mapStateToProps,{searchNflHierarchy, searchMLBTeams, searchNBALeague, searchNBARoster, searchNFLRoster, searchMLBRoster, searchNBAPlayers, searchNFLPlayers, searchMLBPlayers })(DropDownMenu)

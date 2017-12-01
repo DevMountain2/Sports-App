@@ -132,8 +132,8 @@ app.get('/api/MLBschedule', (req, res) => {
   }).catch(console.log)
 })
 
-app.get('/api/MLBplayers', (req, res) => {
-  axios.get('http://api.sportradar.us/mlb-t6/players/6e1cac5c-b059-4b80-a267-5143b19efb27/profile.json?api_key=' + MLB).then(response => {
+app.get('/api/MLBplayers/:player_id', (req, res) => {
+  axios.get(`http://api.sportradar.us/mlb-t6/players/${req.params.player_id}/profile.json?api_key=` + MLB).then(response => {
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -159,9 +159,7 @@ app.get("/api/Favorites", (req, res, next) => {
   const dbInstance = req.app.get("db")
 
   if(req.user.id){
-    console.log("user ", req.user.id)
   dbInstance.getFavoritesByUserId([req.user.id]).then(response => {
-    console.log(response)
     return res.json(response) })
     .catch(console.log);
   }
@@ -176,10 +174,9 @@ dbInstance.getUsers().then(response => { res.json(response) })
 
 app.post('/api/postFavorites', (req, res, next) => {
   const dbInstance = req.app.get('db')
-  console.log("trying to find user id to post ",req.user);
   if(req.user){
-    console.log("posting", req.user.id, req.body.player_id);
-    dbInstance.createFavorites([req.user.id, req.body.player_id]).then(response => { res.json(response)})
+    //console.log(req.body.selectedSport);
+    dbInstance.createFavorites([req.user.id, req.body.player_id, req.body.selectedSport]).then(response => { res.json(response)})
     .catch(console.log)
   }
   else {
