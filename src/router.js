@@ -10,7 +10,6 @@ export default (
     <Route exact path='/' component={LandingPage} />
     <Route path='/Home' component={Home} />
     <Route path='/Favorites' component={Favorites} />
-    <Route path='/Home' component={Home} />
     </Switch>
   </BrowserRouter>
 

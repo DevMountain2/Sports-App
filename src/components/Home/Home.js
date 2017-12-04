@@ -22,18 +22,15 @@ class Home extends Component {
   render(){
     return(
     <div className="main-container">
-      <div>
         <NavBar />
 
-        <SearchMlbSchedule />
-        <SearchMlbPlayers />
-        <SearchSchedule />
-        <SearchNbaPlayers />
-        <SearchNflGames />      
-        <SearchNflPlayers />
-        <DropDownMenu />
-        <h1>Home page</h1>
-      </div>
+
+        <div className='main-body'>
+        <div className='menu-container'>
+          <DropDownMenu />
+        </div>
+        </div>
+
     </div>
     )
   }

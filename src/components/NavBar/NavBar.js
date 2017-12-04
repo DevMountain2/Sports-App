@@ -11,12 +11,12 @@ render(){
     <div className="main-nav">
       <img className="nav-logo" src={require('../../images/Nav-logo.png')} alt='asdf' />
       <Link to= '/Favorites'>
-      <div className="Favorites">Favorites</div>
+      <span className="Favorites">Favorites</span>
       </Link>
       <Link to='/Home'>
-      <div className="Home">Home</div>
+      <span className="Home">Home</span>
       </Link>
-      <div onClick={() => {this.props.history.push('/')}}className="Logout">Logout</div>
+      <span onClick={() => {this.props.history.push('/')}}className="Logout">Logout</span>
     </div>
   )
 }

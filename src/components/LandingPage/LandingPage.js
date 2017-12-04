@@ -21,7 +21,7 @@ class LandingPage extends Component {
       <div className="background-gif">
         <div className="login-button">
         <h1>Welcome to Sportify</h1>
-          <button onClick={this.handleLogin}>Login Here</button>
+          <button className="button" onClick={this.handleLogin}>Login Here</button>
           </div>
         </div>
       );

@@ -8,21 +8,56 @@
 }
 
 .players-container {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(30, 30, 30, 0.5);
   position: absolute;
   top: 50%;
   left: 50%;
   margin-top: -175px;
   margin-left: -50px;
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
   border-top-right-radius: 5%;
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
   border-bottom-right-radius: 5%;
   box-shadow: 2px 2px 30px black;
   border: 2px solid black;
+  color: white;
+}
 
+.fav-heading{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
+.player-select{
+  height: 30px;
+  width: 200px;
+  font-size: 14px;
+}
 
+.submit-btn{
+  border-radius: 5px;
+  font-size: 14px;
+  height: 30px;
+  width: 80px;
+  text-align: center;
+  color: #F2F2F2;
+  background: #222;
+  border-style: none;
+}
+
+.submit-btn:hover{
+  transition: all ease 0.8s;
+  color: #222;
+  background: #F2F2F2;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #222;
+}
+
+.player-stats{
+  line-height: 2.0em;
 }

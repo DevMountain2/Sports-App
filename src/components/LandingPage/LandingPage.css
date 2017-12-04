@@ -38,4 +38,16 @@
   text-align:center;
   color: white;
   font-size: 25px;
+  font-family: 'Exo', sans-serif;
+}
+
+.button{
+  border-radius: 5px;
+  font-size: 14px;
+  height: 40px;
+  width: 110px;
+  text-align: center;
+  color: #222;
+  background: #F2F2F2;
+  border-style: none;
 }

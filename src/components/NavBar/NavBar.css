@@ -11,11 +11,8 @@
 
 }
 
-.Logout {
-  color: white;
-}
-
-.Favorites {
+.main-nav *{
+  text-decoration: none;
   color: white;
 }
 

@@ -1,0 +1,34 @@
+.Drop-Down {
+  height: 30px;
+  width: 200px;
+  font-size: 14px;
+
+}
+.nfl-dropdown {
+  height: 30px;
+  width: 200px;
+  font-size: 14px;
+}
+
+.nba-dropdown{
+  height: 30px;
+  width: 200px;
+  font-size: 14px;
+}
+
+.mlb-dropdown{
+  height: 30px;
+  width: 200px;
+  font-size: 14px;
+}
+
+.player-submit {
+  border-radius: 5px;
+  font-size: 14px;
+  height: 30px;
+  width: 80px;
+  text-align: center;
+  color: #222;
+  background: #F2F2F2;
+  border-style: none;
+}

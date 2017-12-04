@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import './DropDownMenu.css'
 import {searchNflHierarchy, searchMLBTeams, searchNBALeague, searchMLBRoster, searchNBARoster, searchNFLRoster, searchNBAPlayers, searchNFLPlayers, searchMLBPlayers } from '../../ducks/reducer.js'
 
 
@@ -34,8 +35,6 @@ class DropDownMenu extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    console.log(this.props.selectedPlayer);
-    console.log(this.state.selectedSport);
     axios.post('/api/postFavorites', {player_id: this.props.selectedPlayer, selectedSport: this.state.selectedSport})
   }
 
@@ -54,6 +53,7 @@ class DropDownMenu extends Component {
 
 
   render() {
+    //console.log(this.state.nflteams)
     let dropdown = null
     let options = null
     let roster = null
@@ -64,7 +64,7 @@ class DropDownMenu extends Component {
         //console.log(x.id)
         return (<option key={x.id} value={x.id}> {x.market + " " + x.name} </option>)
       })
-      dropdown = (<select onChange={e => this.props.searchNFLRoster(e.target.value)}>
+      dropdown = (<select className="Drop-Down" onChange={e => this.props.searchNFLRoster(e.target.value)}>
       {options}
       </select>)
     }
@@ -73,7 +73,7 @@ class DropDownMenu extends Component {
           //console.log(x)
           return (<option key={x.id} value={x.id}> {x.market + " " + x.name} </option>)
       })
-      dropdown = (<select onChange={e => this.props.searchNBARoster(e.target.value)}>
+      dropdown = (<select className="Drop-Down" onChange={e => this.props.searchNBARoster(e.target.value)}>
       {options}
       </select>)
     }
@@ -82,7 +82,7 @@ class DropDownMenu extends Component {
          //console.log(x);
          return (<option key={x.id} value={x.id}> {x.market + " " + x.name} </option>)
        })
-      dropdown = (<select onChange={e => this.props.searchMLBRoster(e.target.value)}>
+      dropdown = (<select className="Drop-Down" onChange={e => this.props.searchMLBRoster(e.target.value)}>
       {options}
       </select>)
     }
@@ -91,21 +91,21 @@ class DropDownMenu extends Component {
     let playerDropDown = () => {
       if(this.props.NBARoster.length){
         return  (
-          <select onChange={(e)=>this.props.searchNBAPlayers(e.target.value)}> {this.props.NBARoster.map(x => {
+          <select className="Drop-Down" onChange={(e)=>this.props.searchNBAPlayers(e.target.value)}> {this.props.NBARoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
             </select>
         )
       } else if(this.props.NFLRoster.length){
         return  (
-          <select onChange={(e)=>this.props.searchNFLPlayers(e.target.value)}> {this.props.NFLRoster.map(x => {
+          <select className="Drop-Down" onChange={(e)=>this.props.searchNFLPlayers(e.target.value)}> {this.props.NFLRoster.map(x => {
              return (<option key={x.id} value={x.id}> {x.name} </option>)
           })}
             </select>
         )
       } else if(this.props.MLBRoster) {
         return (
-          <select onChange={(e)=>this.props.searchMLBPlayers(e.target.value)}> {this.props.MLBRoster.map(x => {
+          <select className="Drop-Down" onChange={(e)=>this.props.searchMLBPlayers(e.target.value)}> {this.props.MLBRoster.map(x => {
             return (<option key={x.id} value={x.id}> {x.full_name} </option>)
           })}
           </select>
@@ -118,8 +118,7 @@ class DropDownMenu extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Find your fantasy players:
-          <select onChange={(event) => {this.setState({selectedSport: event.target.value})}}>
+          <select className="Drop-Down" onChange={(event) => {this.setState({selectedSport: event.target.value})}}>
             <option value="NFL">Football</option>
             <option value="NBA">Basketball</option>
             <option value="MLB">Baseball</option>
@@ -128,7 +127,7 @@ class DropDownMenu extends Component {
           {roster}
           {playerDropDown()}
         </label>
-        <input type="submit" value="Submit" />
+        <input className="player-submit" type="submit" value="Submit" />
       </form>
     );
   }
