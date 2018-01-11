@@ -6,7 +6,7 @@ import router from '../../router'
 class App extends Component {
    componentDidMount (){
      axios.get("/api/test").then(response => {
-       console.log(response);
+       //console.log(response);
     })
   }
   render() {

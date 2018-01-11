@@ -53,7 +53,7 @@ class DropDownMenu extends Component {
 
 
   render() {
-    //console.log(this.state.nflteams)
+    // console.log(this.state.nflteams)
     let dropdown = null
     let options = null
     let roster = null
@@ -61,7 +61,7 @@ class DropDownMenu extends Component {
 
     if (this.state.selectedSport === "NFL"){
       options = this.state.nflteams.map(x => {
-        //console.log(x.id)
+        //console.log(x)
         return (<option key={x.id} value={x.id}> {x.market + " " + x.name} </option>)
       })
       dropdown = (<select className="Drop-Down" onChange={e => this.props.searchNFLRoster(e.target.value)}>

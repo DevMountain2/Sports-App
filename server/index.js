@@ -103,8 +103,9 @@ app.get('/api/NFLroster/:team_id', (req, res) => {
 })
 
 app.get('/api/NFLplayers/:player_id', (req, res) => {
-  console.log('index.js', req.params)
+  //console.log('index.js', req.params)
   axios.get(`http://api.sportradar.us/nfl-ot2/players/${req.params.player_id}/profile.json?api_key=` + NFL).then(response => {
+    //console.log(response.data);
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -116,7 +117,7 @@ app.get('/api/NBAleague', (req, res) => {
 })
 
 app.get('/api/NBAroster/:team_id', (req, res) => {
-  console.log(req.params);
+  //console.log(req.params);
   axios.get(`http://api.sportradar.us/nba/trial/v4/en/teams/${req.params.team_id}/profile.json?api_key=` + NBA).then(response => {
     return res.send(response.data)
   }).catch(console.log)
@@ -124,7 +125,7 @@ app.get('/api/NBAroster/:team_id', (req, res) => {
 
 app.get('/api/NBAplayers/:player_id', (req, res) => {
   axios.get(`http://api.sportradar.us/nba/trial/v4/en/players/${req.params.player_id}/profile.json?api_key=` + NBA).then(response => {
-    // console.log(response.data);
+    //console.log(response.data);
     return res.json(response.data)
   }).catch(console.log)
 })
@@ -136,8 +137,9 @@ app.get('/api/MLBschedule', (req, res) => {
 })
 
 app.get('/api/MLBplayers/:player_id', (req, res) => {
-  console.log(req.params);
+  //console.log(req.params);
   axios.get(`http://api.sportradar.us/mlb-t6/players/${req.params.player_id}/profile.json?api_key=` + MLB).then(response => {
+    //console.log(response.data);
     return res.send(response.data)
   }).catch(console.log)
 })
@@ -164,6 +166,7 @@ app.get("/api/Favorites", (req, res, next) => {
 
   if(req.user.id){
   dbInstance.getFavoritesByUserId([req.user.id]).then(response => {
+    //console.log(response);
     return res.json(response) })
     .catch(console.log);
   }
