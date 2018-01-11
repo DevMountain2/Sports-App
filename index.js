@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { json } = require('body-parser');
@@ -6,7 +7,7 @@ const massive = require('massive');
 const passport = require('passport');
 const Auth0Strategy = require("passport-auth0");
 const axios = require('axios')
-require('dotenv').config();
+
 // const { secret } = require('../config.js').session
 // const { domain, clientID, clientSecret } = require("../config.js").Auth0;
 // const { NBA, NFL, MLB } = require("../config.js").Api_key;
@@ -14,12 +15,11 @@ require('dotenv').config();
 const NBA = process.env.NBA
 const NFL = process.env.NFL
 const MLB = process.env.MLB
-
 const port = 3001;
 const connectionString = process.env.CONNECTION_STRING;
 
 const app = express();
-app.use( express.static( `${__dirname}/../build` ) );
+app.use( express.static( `${__dirname}/build` ) );
 app.use(session({
     secret: process.env.SECRET,
     resave: true,
@@ -39,7 +39,7 @@ passport.use(new Auth0Strategy(
   {
     domain: process.env.DOMAIN,
     clientID: process.env.CLIENTID,
-    clientSecret: process.env.CLIENTSECRET
+    clientSecret: process.env.CLIENTSECRET,
     callbackURL: "/login"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
@@ -64,7 +64,7 @@ passport.deserializeUser(function(obj, done){
 })
 
 app.get("/login", passport.authenticate("auth0", {
-  successRedirect: "http://localhost:3000/Home"
+  successRedirect: "/Home"
   })
 )
 
@@ -195,6 +195,10 @@ app.post('/api/postFavorites', (req, res, next) => {
   }
  });
 
+const path = require('path')
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"))
+})
 
 
 app.listen(port, () => {
