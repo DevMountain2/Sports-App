@@ -6,18 +6,22 @@ const massive = require('massive');
 const passport = require('passport');
 const Auth0Strategy = require("passport-auth0");
 const axios = require('axios')
+require('dotenv').config();
+// const { secret } = require('../config.js').session
+// const { domain, clientID, clientSecret } = require("../config.js").Auth0;
+// const { NBA, NFL, MLB } = require("../config.js").Api_key;
 
-const { secret } = require('../config.js').session
-const { domain, clientID, clientSecret } = require("../config.js").Auth0;
-const { NBA, NFL, MLB } = require("../config.js").Api_key;
+const NBA = process.env.NBA
+const NFL = process.env.NFL
+const MLB = process.env.MLB
 
 const port = 3001;
-const connectionString = require("../config.js").massive;
+const connectionString = process.env.CONNECTION_STRING;
 
 const app = express();
-
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(session({
-    secret,
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
@@ -33,9 +37,9 @@ app.use(passport.session());
 
 passport.use(new Auth0Strategy(
   {
-    domain,
-    clientID,
-    clientSecret,
+    domain: process.env.DOMAIN,
+    clientID: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET
     callbackURL: "/login"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
