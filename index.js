@@ -15,7 +15,7 @@ const axios = require('axios')
 const NBA = process.env.NBA
 const NFL = process.env.NFL
 const MLB = process.env.MLB
-const port = 3001;
+const port = process.env.PORT || 3001;
 const connectionString = process.env.CONNECTION_STRING;
 
 const app = express();
@@ -197,7 +197,7 @@ app.post('/api/postFavorites', (req, res, next) => {
 
 const path = require('path')
 app.get('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname + "/build/index.html"))
+  res.sendFile(path.join(__dirname + "build/index.html"))
 })
 
 
